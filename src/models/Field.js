@@ -1,0 +1,9 @@
+export default {
+    name: null,
+    counter: null,
+    component: null,
+    items: null,
+    prefix: null,
+    label: null,
+    rules: {}
+}
