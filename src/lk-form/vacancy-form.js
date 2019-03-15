@@ -19,14 +19,14 @@ export default {
     counter: 2000,
     component: VTextarea,
   }),
-  TypeOfEmployment: Object.assign({}, Field, {
+  typeOfEmployment: Object.assign({}, Field, {
     name: 'TypeOfEmployment',
     label: 'Тип занятости*',
     rules: [v => !!v || 'Тип занятости обязателен к заполнению'],
     component: VSelect,
     items: ['Полный рабочий день', 'Удаленная работа', 'Студент'],
   }),
-  Schedule: Object.assign({}, Field, {
+  schedule: Object.assign({}, Field, {
     name: 'Schedule',
     label: 'График работы*',
     rules: [v => !!v || 'График работы обязателен к заполнению'],

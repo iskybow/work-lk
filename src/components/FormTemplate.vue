@@ -4,6 +4,7 @@
     v-model="valid"
     lazy-validation
   >
+    <slot />
     <component v-for="(input, index) in formTemplate()"
                :is="input.component"
                :key="index"
@@ -14,6 +15,7 @@
                :items="input.items"
                :prefix="input.prefix"
                v-model="formData[index]"
+               :mask="input.maskPhone"
     ></component>
 
     <v-btn
@@ -23,12 +25,11 @@
     >
       Сохранить
     </v-btn>
-    <slot />
+
   </v-form>
 </template>
 
 <script>
-  import Advert from '../models/Advert';
 
   export default {
     name: "FormTemplate",
@@ -41,9 +42,6 @@
       paramsFile: Object,
       value: {
         type: Object,
-        default: () => {
-          return Object.assign(Advert, {});
-        }
       }
     },
     methods: {

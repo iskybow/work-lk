@@ -1,8 +1,8 @@
 export default {
     post: null,
     duties: null,
-    TypeOfEmployment: null,
-    Schedule: null,
+    typeOfEmployment: null,
+    schedule: null,
     salaryFrom: null,
     salaryBefore: null,
     qualificationRequirements: null,

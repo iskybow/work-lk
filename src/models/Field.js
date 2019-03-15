@@ -5,5 +5,6 @@ export default {
     items: null,
     prefix: null,
     label: null,
-    rules: {}
+    rules: {},
+    maskPhone: null
 }
