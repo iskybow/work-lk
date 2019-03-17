@@ -14,9 +14,13 @@
                :counter="input.counter"
                :items="input.items"
                :prefix="input.prefix"
-               v-model="formData[index]"
                :mask="input.maskPhone"
-    ></component>
+               :class="input.class"
+               :type="input.type"
+               v-model="formData[index]"
+    >
+      {{ input.text }}
+    </component>
 
     <v-btn
       :disabled="!valid"
@@ -30,7 +34,6 @@
 </template>
 
 <script>
-
   export default {
     name: "FormTemplate",
     data: () => ({
@@ -58,4 +61,10 @@
 </script>
 
 <style scoped>
+  .input-head {
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 22px;
+    border-bottom: 1px solid rgba(0,0,0,0.54);
+  }
 </style>

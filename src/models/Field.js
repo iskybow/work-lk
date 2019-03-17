@@ -6,5 +6,8 @@ export default {
     prefix: null,
     label: null,
     rules: {},
-    maskPhone: null
+    maskPhone: null,
+    text: null,
+    class: null,
+    type: null
 }
