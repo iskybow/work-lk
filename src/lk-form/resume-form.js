@@ -1,109 +1,239 @@
 import Field from '../models/Field';
-import {VTextarea, VTextField, VSelect} from 'vuetify/lib'
+import {VTextarea, VTextField, VSelect, VCheckbox, VSubheader,} from 'vuetify/lib'
 
 export default {
-  post: Object.assign({}, Field, {
-    name: 'post',
-    label: 'qwertygf*',
+  name: Object.assign({}, Field, {
+    name: 'name',
+    label: 'Имя*',
     rules: [
-      v => !!v || 'Должность обязательна к заполнению',
-      v => (v && v.length >= 5) || 'Больше 5 символов'
+      v => !!v || 'Имя обязательно к заполнению',
+      v => (v && v.length >= 5) || 'Больше 3 символов'
     ],
-    counter: 50,
+    counter: 15,
     component: VTextField,
   }),
-  duties: Object.assign({}, Field, {
-    name: 'duties',
-    label: 'Обязанности*',
-    rules: [v => !!v || 'Обязанность обязательна к заполнению',],
+  surname: Object.assign({}, Field, {
+    name: 'surname',
+    label: 'Фамилия*',
+    rules: [v => !!v || 'Фамилия обязательна к заполнению',],
+    counter: 20,
+    component: VTextField,
+  }),
+  email: Object.assign({}, Field, {
+    name: 'email',
+    label: 'E-mail*',
+    rules: [
+      v => !!v || 'E-mail обязателен к заполнению',
+      v => /.+@.+/.test(v) || 'Введите правильный E-mail'
+    ],
+    component: VTextField,
+  }),
+  phoneNumber: Object.assign({}, Field, {
+    name: 'phoneNumber',
+    label: 'Мобильный*',
+    rules: [
+      v => !!v || 'Мобильный обязателен к заполнению',
+      v => (v && v.length >= 11) || 'Введите 11 символов'
+    ],
+    component: VTextField,
+    maskPhone: '+# (###) ## - ## - ###',
+  }),
+  careerObjective: Object.assign({}, Field, {
+    name: 'careerObjective',
+    label: 'Желаемая должность*',
+    rules: [v => !!v  || 'Желаемая должность обязателена к заполнению'],
+    component: VTextField,
+  }),
+  careerObjectiveCheckbox: Object.assign({}, Field, {
+    name: 'careerObjectiveCheckbox',
+    label: 'Показать желаемую должность в резюме',
+    rules: [],
+    component: VCheckbox,
+  }),
+  aboutMe: Object.assign({}, Field, {
+    name: 'aboutMe',
+    label: 'О себе',
+    rules: [],
     counter: 2000,
     component: VTextarea,
   }),
-  TypeOfEmployment: Object.assign({}, Field, {
-    name: 'TypeOfEmployment',
-    label: 'Тип занятости*',
-    rules: [v => !!v || 'Тип занятости обязателен к заполнению'],
-    component: VSelect,
-    items: ['Полный рабочий день', 'Удаленная работа', 'Студент'],
-  }),
-  Schedule: Object.assign({}, Field, {
-    name: 'Schedule',
-    label: 'График работы*',
-    rules: [v => !!v || 'График работы обязателен к заполнению'],
-    component: VSelect,
-    items: [
-      'Полный рабочий день',
-      'Удаленная работа',
-      'Студент'
-    ],
-  }),
-  salaryFrom: Object.assign({}, Field, {
-    name: 'salaryFrom',
-    label: 'Зарплата в месяц от',
-    rules: [v => /^\d+$/.test(v) || 'Только цыфры'],
-    component: VTextField,
-    prefix: "₽",
-  }),
-  salaryBefore: Object.assign({}, Field, {
-    name: 'salaryBefore',
-    label: 'Зарплата в месяц до',
-    rules: [v => /^\d+$/.test(v) || 'Только цыфры'],
-    component: VTextField,
-    prefix: "₽",
-  }),
-  qualificationRequirements: Object.assign({}, Field, {
-    name: 'qualificationRequirements',
-    label: 'Требования к квалификации*',
-    rules: [ v => !!v || 'Требования к квалификации обязательна к заполнению'],
-    counter: 2000,
-    component: VTextarea,
-  }),
-  experience: Object.assign({}, Field, {
-    name: 'experience',
-    label: 'Опыт работы',
-    component: VSelect,
+  headUniversity: Object.assign({}, Field, {
+    text: 'Образование',
     rules: [],
-    items: [
-      'Не имеет значения',
-      'Менее года',
-      '1 год',
-      '2 года',
+    class: 'input-head',
+    component: VSubheader,
+  }),
+  universityName: Object.assign({}, Field, {
+    name: 'universityName',
+    label: 'Название университета*',
+    component: VTextField,
+    rules: [v => !!v  || 'Название университета обязателено к заполнению'],
+  }),
+  admissionYear: Object.assign({}, Field, {
+    name: 'admissionYear',
+    label: 'Год поступления*',
+    component: VTextField,
+    type: 'number',
+    rules: [
+      v => !!v  || 'Год поступления обязателен к заполнению',
+      v => /^\d+$/.test(v) || 'Только цыфры'
     ],
   }),
-  education: Object.assign({}, Field, {
-    name: 'education',
-    label: 'Образование',
-    component: VSelect,
+  yearOfEnding: Object.assign({}, Field, {
+    name: 'yearOfEnding',
+    label: 'Год окончания*',
+    component: VTextField,
+    type: 'number',
+    rules: [
+      v => !!v  || 'Год окончания обязателен к заполнению',
+      v => /^\d+$/.test(v) || 'Только цыфры'
+    ],
+  }),
+  academicDegree: Object.assign({}, Field, {
+    name: 'academicDegree',
+    label: 'Академ степень',
     rules: [],
+    component: VSelect,
     items: [
-      'Не имеет значения',
-      'Среднее',
-      'Неполное высшее',
-      'Высшее',
+      'Бакалавр',
+      'Магистр',
     ],
   }),
-  workingConditions: Object.assign({}, Field, {
-    name: 'workingConditions',
-    label: 'Условия работы*',
-    rules: [ v => !!v || 'Условия работы обязательна к заполнению'],
-    counter: 2000,
-    component: VTextarea,
+  faculty: Object.assign({}, Field, {
+    name: 'faculty',
+    label: 'Факультет*',
+    rules: [v => !!v  || 'Факультет обязателен к заполнению'],
+    component: VTextField,
   }),
-  vacancyVideo: Object.assign({}, Field, {
-    name: 'vacancyVideo',
-    label: 'Видео о вакансии',
+  specialization: Object.assign({}, Field, {
+    name: 'specialization',
+    label: 'Специализация',
     rules: [],
     component: VTextField,
   }),
-  officeAdress: Object.assign({}, Field, {
-    name: 'officeAdress',
-    label: 'Адрес офиса',
-    rules: [v => (v && v.length >= 5) || 'Больше 5 символов'],
+  headWork: Object.assign({}, Field, {
+    text: 'Опыт работы',
+    rules: [],
+    class: 'input-head',
+    component: VSubheader,
+  }),
+  companyName: Object.assign({}, Field, {
+    name: 'companyName',
+    label: 'Название компании*',
+    component: VTextField,
+    rules: [v => !!v  || 'Название компании обязателено к заполнению'],
+  }),
+  positionWork: Object.assign({}, Field, {
+    name: 'positionWork',
+    label: 'Должность*',
+    component: VTextField,
+    rules: [v => !!v  || 'Должность обязателена к заполнению'],
+  }),
+  departmentWork: Object.assign({}, Field, {
+    name: 'departmentWork',
+    label: 'Отдел',
+    component: VTextField,
+    rules: [],
+  }),
+  monthBeganWork: Object.assign({}, Field, {
+    name: 'monthBeganWork',
+    label: 'Месяц начала*',
+    rules: [v => !!v || 'Месяц начала обязателен к заполнению'],
+    component: VSelect,
+    items: [
+      'Январь',
+      'Февраль',
+      'Март',
+      'Апрель',
+      'Май',
+      'Июнь',
+      'Июль',
+      'Август',
+      'Сентябрь',
+      'Октябрь',
+      'Ноябрь',
+      'Декабрь',
+    ],
+  }),
+  startYearWork: Object.assign({}, Field, {
+    name: 'startYearWork',
+    label: 'Год начала*',
+    component: VTextField,
+    type: 'number',
+    rules: [
+      v => !!v  || 'Год начала обязателен к заполнению',
+      v => /^\d+$/.test(v) || 'Только цыфры'
+    ],
+  }),
+  endMonthWork: Object.assign({}, Field, {
+    name: 'endMonthWork',
+    label: 'Месяц окончания*',
+    rules: [v => !!v || 'Месяц окончания обязателен к заполнению'],
+    component: VSelect,
+    items: [
+      'Январь',
+      'Февраль',
+      'Март',
+      'Апрель',
+      'Май',
+      'Июнь',
+      'Июль',
+      'Август',
+      'Сентябрь',
+      'Октябрь',
+      'Ноябрь',
+      'Декабрь',
+    ],
+  }),
+  yearOfEndingWork: Object.assign({}, Field, {
+    name: 'yearOfEndingWork',
+    label: 'Год окончания*',
+    component: VTextField,
+    type: 'number',
+    rules: [
+      v => !!v  || 'Год окончания обязателен к заполнению',
+      v => /^\d+$/.test(v) || 'Только цыфры'
+    ],
+  }),
+  dutiesAndAccomplishments: Object.assign({}, Field, {
+    text: 'Обязанности / Достижения',
+    rules: [],
+    class: 'input-head',
+    component: VSubheader,
+  }),
+  duties1: Object.assign({}, Field, {
+    name: 'duties1',
+    label: '1.',
+    rules: [],
     component: VTextField,
   }),
-  houseNumber: Object.assign({}, Field, {
-    name: 'houseNumber',
-    label: 'Номер дома',
+  duties2: Object.assign({}, Field, {
+    name: 'duties2',
+    label: '2.',
+    rules: [],
+    component: VTextField,
+  }),
+  duties3: Object.assign({}, Field, {
+    name: 'duties3',
+    label: '3.',
+    rules: [],
+    component: VTextField,
+  }),
+  duties4: Object.assign({}, Field, {
+    name: 'duties4',
+    label: '4.',
+    rules: [],
+    component: VTextField,
+  }),
+  duties5: Object.assign({}, Field, {
+    name: 'duties5',
+    label: '5.',
+    rules: [],
+    component: VTextField,
+  }),
+  duties6: Object.assign({}, Field, {
+    name: 'duties6',
+    label: '6.',
     rules: [],
     component: VTextField,
   }),
