@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="work-experience">
     <div class="work-block" v-for="(item, index) in works" :key="index">
 
       <v-btn class="remove-block" :id="'removeBlock'+index" @click="removeBlock(index)">
@@ -15,6 +15,7 @@
                  :items="input.items"
                  :class="input.class"
                  :type="input.type"
+                 v-model="value[input.name]"
       >
         {{ input.text }}
       </component>
@@ -33,6 +34,11 @@
 
   export default {
     name: "AddWork",
+    props: {
+      value: {
+        type: [String,Number,Boolean,Array,Object],
+      }
+    },
     data() {
       return {
         counterDopWork: 1,
@@ -44,8 +50,6 @@
         delete this.works[index];
         this.$forceUpdate();
         document.getElementById('removeBlock'+index).remove();
-        // this.$delete(this.works, index);
-        console.log(this.works);
       },
       addNewWork() {
         let arrNames = {
@@ -80,7 +84,10 @@
 </script>
 
 <style>
-  .hide-btn {
+  .work-experience {
+    margin-bottom: 20px;
+  }
+  .work-experience .work-block:first-child .remove-block {
     display: none;
   }
 </style>

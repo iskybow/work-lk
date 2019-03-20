@@ -1,5 +1,5 @@
 <template>
-  <FormTemplate :paramsFile="getFormData()">
+  <FormTemplate :paramsFile="getFormData()" v-model="formData">
 
     <image-uploader
       class="input-file"
@@ -28,6 +28,25 @@
       return {
         hasImage: false,
         image: null,
+        formData: {
+          workBlock: {
+            companyName0: '',
+            positionWork0: '',
+            departmentWork0: '',
+            monthBeganWork0: '',
+            startYearWork0: '',
+            endMonthWork0: '',
+            yearOfEndingWork0: '',
+          },
+          educationBlock: {
+            universityName: '',
+            admissionYear: '',
+            yearOfEnding: '',
+            academicDegree: '',
+            faculty: '',
+            specialization: ''
+          }
+        }
       };
     },
     name: "FormVacancy",

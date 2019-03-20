@@ -1,6 +1,8 @@
 import Field from '../models/Field';
 import {VTextarea, VTextField, VSelect, VCheckbox, VSubheader,} from 'vuetify/lib'
 import AddWork from "../components/AddWork";
+import AddEducation from "../components/AddEducation";
+import AddSocial from "../components/AddSocial";
 
 export default {
   name: Object.assign({}, Field, {
@@ -58,60 +60,13 @@ export default {
     counter: 2000,
     component: VTextarea,
   }),
-  headUniversity: Object.assign({}, Field, {
-    id: 'headUniversity',
-    text: 'Образование',
+  addSocial: Object.assign({}, Field, {
+    component: AddSocial,
     rules: [],
-    class: 'input-head',
-    component: VSubheader,
   }),
-  universityName: Object.assign({}, Field, {
-    name: 'universityName',
-    label: 'Название университета*',
-    component: VTextField,
-    rules: [v => !!v  || 'Название университета обязателено к заполнению'],
-  }),
-  admissionYear: Object.assign({}, Field, {
-    name: 'admissionYear',
-    label: 'Год поступления*',
-    component: VTextField,
-    type: 'number',
-    rules: [
-      v => !!v  || 'Год поступления обязателен к заполнению',
-      v => /^\d+$/.test(v) || 'Только цыфры'
-    ],
-  }),
-  yearOfEnding: Object.assign({}, Field, {
-    name: 'yearOfEnding',
-    label: 'Год окончания*',
-    component: VTextField,
-    type: 'number',
-    rules: [
-      v => !!v  || 'Год окончания обязателен к заполнению',
-      v => /^\d+$/.test(v) || 'Только цыфры'
-    ],
-  }),
-  academicDegree: Object.assign({}, Field, {
-    name: 'academicDegree',
-    label: 'Академ степень',
+  educationBlock: Object.assign({}, Field, {
+    component: AddEducation,
     rules: [],
-    component: VSelect,
-    items: [
-      'Бакалавр',
-      'Магистр',
-    ],
-  }),
-  faculty: Object.assign({}, Field, {
-    name: 'faculty',
-    label: 'Факультет*',
-    rules: [v => !!v  || 'Факультет обязателен к заполнению'],
-    component: VTextField,
-  }),
-  specialization: Object.assign({}, Field, {
-    name: 'specialization',
-    label: 'Специализация',
-    rules: [],
-    component: VTextField,
   }),
   workBlock: Object.assign({}, Field, {
     component: AddWork,

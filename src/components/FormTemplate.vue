@@ -18,8 +18,9 @@
                :mask="input.maskPhone"
                :class="input.class"
                :type="input.type"
-               v-model="formData[index]"
+               v-model="value[index]"
     >
+      {{index}}
       {{ input.text }}
     </component>
 
@@ -27,7 +28,7 @@
       :disabled="!valid"
       color="success"
       @click="validate"
-      type="submit"
+      type="button"
     >
       Сохранить
     </v-btn>
@@ -40,14 +41,13 @@
     name: "FormTemplate",
     data: () => ({
       valid: true,
-      formData: {
-      },
     }),
     props: {
       paramsFile: Object,
       value: {
         type: Object,
-      }
+      },
+
     },
     methods: {
       formTemplate() {
@@ -69,5 +69,12 @@
     padding: 0;
     font-size: 22px;
     border-bottom: 1px solid rgba(0,0,0,0.54);
+  }
+  .hide-btn {
+    display: none;
+  }
+  .remove-block {
+    margin-top: 30px;
+    margin-bottom: -10px;
   }
 </style>
