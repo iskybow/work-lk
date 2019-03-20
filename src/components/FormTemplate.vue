@@ -10,6 +10,7 @@
                :key="index"
                :name="input.name"
                :label="input.label"
+               :id="input.id"
                :rules="input.rules"
                :counter="input.counter"
                :items="input.items"
@@ -26,6 +27,7 @@
       :disabled="!valid"
       color="success"
       @click="validate"
+      type="submit"
     >
       Сохранить
     </v-btn>
@@ -60,9 +62,10 @@
   }
 </script>
 
-<style scoped>
+<style>
   .input-head {
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     padding: 0;
     font-size: 22px;
     border-bottom: 1px solid rgba(0,0,0,0.54);

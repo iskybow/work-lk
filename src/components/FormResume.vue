@@ -33,6 +33,7 @@
     name: "FormVacancy",
     components: {FormTemplate},
     methods: {
+
       getFormData() {
         return FormResume;
       },

@@ -9,5 +9,7 @@ export default {
     maskPhone: null,
     text: null,
     class: null,
-    type: null
+    type: null,
+    id: null,
+    // addWork: (event) => {}
 }
