@@ -1,43 +1,50 @@
 <template>
   <div class="education">
-    <div class="education-block" v-for="(item, index) in education" :key="index">
+    <v-subheader class="input-head" v-on:click="show = !show">Образование</v-subheader>
+    <transition name="fade">
+      <div v-if="!show">
+        <div class="education-block" v-for="(item, index) in education" :key="index">
 
-      <v-btn class="remove-block" :id="'removeBlock'+index" @click="removeBlock(index)">
-        Удалить
-      </v-btn>
+          <v-btn class="remove-education" :id="'removeEducation'+index" @click="removeEducation(index)" v-if="education.length > 1">
+            Удалить
+          </v-btn>
 
-      <component v-for="(input, index) in item"
-                 :is="input.component"
-                 :key="index"
-                 :name="input.name"
-                 :label="input.label"
-                 :rules="input.rules"
-                 :items="input.items"
-                 :class="input.class"
-                 :type="input.type"
-                 v-model="value[input.name]"
-      >
-        {{ input.text }}
-      </component>
-    </div>
-    <v-btn type="button" class="btnEducation"
-           @click="addNewEducation()"
-    >
-      Добавить образование
-    </v-btn>
-
+          <component v-for="(input, indexEducation) in item"
+                     :is="input.component"
+                     :key="indexEducation"
+                     :name="input.name"
+                     :label="input.label"
+                     :rules="input.rules"
+                     :items="input.items"
+                     :class="input.class"
+                     :type="input.type"
+                     v-model="value[index][input.name]"
+          >
+            {{ input.text }}
+          </component>
+        </div>
+        <v-btn type="button" class="btnEducation"
+               @click="addNewEducation()"
+               v-if="education.length < 5"
+        >
+          Добавить образование
+        </v-btn>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
   import FormEducation from '../lk-form/education';
+  import Field from '../models/Field';
+  import {VTextField, VSelect} from 'vuetify/lib'
 
   export default {
     name: "AddEducation",
     data() {
       return {
-        counterDopEducation: 1,
-        education: [FormEducation]
+        education: [FormEducation],
+        show: false
       };
     },
     props: {
@@ -46,36 +53,71 @@
       }
     },
     methods: {
-      removeBlock(index) {
-        delete this.education[index];
+      removeEducation(index) {
+        this.education.splice(index, 1);
+        this.value.splice(index, 1);
         this.$forceUpdate();
-        document.getElementById('removeBlock'+index).remove();
       },
       addNewEducation() {
-        let arrNames = {
-          'headUniversity': 'headUniversity' + this.counterDopEducation,
-          'universityName': 'universityName' + this.counterDopEducation,
-          'admissionYear': 'admissionYear' + this.counterDopEducation,
-          'yearOfEnding': 'yearOfEnding' + this.counterDopEducation,
-          'academicDegree': 'academicDegree' + this.counterDopEducation,
-          'faculty': 'faculty' + this.counterDopEducation,
-          'specialization': 'specialization' + this.counterDopEducation,
+        const template = {
+          universityName: Object.assign({}, Field, {
+            name: `universityName${this.education.length}`,
+            label: 'Название университета*',
+            component: VTextField,
+            rules: [v => !!v  || 'Название университета обязателено к заполнению'],
+          }),
+          admissionYear0: Object.assign({}, Field, {
+            name: `admissionYear${this.education.length}`,
+            label: 'Год поступления*',
+            component: VTextField,
+            type: 'number',
+            rules: [
+              v => !!v  || 'Год поступления обязателен к заполнению',
+              v => /^\d+$/.test(v) || 'Только цыфры'
+            ],
+          }),
+          yearOfEnding0: Object.assign({}, Field, {
+            name: `yearOfEnding${this.education.length}`,
+            label: 'Год окончания*',
+            component: VTextField,
+            type: 'number',
+            rules: [
+              v => !!v  || 'Год окончания обязателен к заполнению',
+              v => /^\d+$/.test(v) || 'Только цыфры'
+            ],
+          }),
+          academicDegree0: Object.assign({}, Field, {
+            name: `academicDegree${this.education.length}`,
+            label: 'Академ степень',
+            rules: [],
+            component: VSelect,
+            items: [
+              'Бакалавр',
+              'Магистр',
+            ],
+          }),
+          faculty0: Object.assign({}, Field, {
+            name: `faculty${this.education.length}`,
+            label: 'Факультет*',
+            rules: [v => !!v  || 'Факультет обязателен к заполнению'],
+            component: VTextField,
+          }),
+          specialization0: Object.assign({}, Field, {
+            name: `specialization${this.education.length}`,
+            label: 'Специализация',
+            rules: [],
+            component: VTextField,
+          }),
         };
-        let data = {};
-        data[arrNames.headUniversity] = FormEducation.headUniversity0;
-        data[arrNames.universityName] = Object.assign(FormEducation.universityName0, {name: (FormEducation.universityName0.name).slice(0, -1) + this.counterDopEducation});
-        data[arrNames.admissionYear] = Object.assign(FormEducation.admissionYear0, {name: (FormEducation.admissionYear0.name).slice(0, -1) + this.counterDopEducation});
-        data[arrNames.yearOfEnding] = Object.assign(FormEducation.yearOfEnding0, {name: (FormEducation.yearOfEnding0.name).slice(0, -1) + this.counterDopEducation});
-        data[arrNames.academicDegree] = Object.assign(FormEducation.academicDegree0, {name: (FormEducation.academicDegree0.name).slice(0, -1) + this.counterDopEducation});
-        data[arrNames.faculty] = Object.assign(FormEducation.faculty0, {name: (FormEducation.faculty0.name).slice(0, -1) + this.counterDopEducation});
-        data[arrNames.specialization] = Object.assign(FormEducation.specialization0, {name: (FormEducation.specialization0.name).slice(0, -1) + this.counterDopEducation});
-
-        this.education.push(data);
-        this.counterDopEducation++;
-        let btn = document.querySelectorAll('.work-block');
-        if (btn.length === 4) {
-          document.querySelector('.btnWork').classList.add('hide-btn');
-        }
+        this.education.push(template);
+        this.value.push({
+          universityName: '',
+          admissionYear: '',
+          yearOfEnding: '',
+          academicDegree: '',
+          faculty: '',
+          specialization: '',
+        });
       },
     },
   }
@@ -84,8 +126,5 @@
 <style>
   .education {
     margin-bottom: 20px;
-  }
-  .education .education-block:first-child .remove-block {
-    display: none;
   }
 </style>

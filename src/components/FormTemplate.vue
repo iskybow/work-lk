@@ -20,7 +20,6 @@
                :type="input.type"
                v-model="value[index]"
     >
-      {{index}}
       {{ input.text }}
     </component>
 

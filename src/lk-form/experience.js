@@ -1,33 +1,27 @@
 import Field from '../models/Field';
-import {VTextField, VSelect, VSubheader,} from 'vuetify/lib'
+import {VTextField, VSelect} from 'vuetify/lib'
 
 export default {
-  headWork0: Object.assign({}, Field, {
-    text: 'Опыт работы',
-    rules: [],
-    class: 'input-head',
-    component: VSubheader,
-  }),
-  companyName0: Object.assign({}, Field, {
-    name: 'companyName0',
+  companyName: Object.assign({}, Field, {
+    name: 'companyName',
     label: 'Название компании*',
     component: VTextField,
     rules: [v => !!v || 'Название компании обязателено к заполнению'],
   }),
-  positionWork0: Object.assign({}, Field, {
-    name: 'positionWork0',
+  positionWork: Object.assign({}, Field, {
+    name: 'positionWork',
     label: 'Должность*',
     component: VTextField,
     rules: [v => !!v || 'Должность обязателена к заполнению'],
   }),
-  departmentWork0: Object.assign({}, Field, {
-    name: 'departmentWork0',
+  departmentWork: Object.assign({}, Field, {
+    name: 'departmentWork',
     label: 'Отдел',
     component: VTextField,
     rules: [],
   }),
-  monthBeganWork0: Object.assign({}, Field, {
-    name: 'monthBeganWork0',
+  monthBeganWork: Object.assign({}, Field, {
+    name: 'monthBeganWork',
     label: 'Месяц начала*',
     rules: [v => !!v || 'Месяц начала обязателен к заполнению'],
     component: VSelect,
@@ -46,8 +40,8 @@ export default {
       'Декабрь',
     ],
   }),
-  startYearWork0: Object.assign({}, Field, {
-    name: 'startYearWork0',
+  startYearWork: Object.assign({}, Field, {
+    name: 'startYearWork',
     label: 'Год начала*',
     component: VTextField,
     type: 'number',
@@ -56,8 +50,8 @@ export default {
       v => /^\d+$/.test(v) || 'Только цыфры'
     ],
   }),
-  endMonthWork0: Object.assign({}, Field, {
-    name: 'endMonthWork0',
+  endMonthWork: Object.assign({}, Field, {
+    name: 'endMonthWork',
     label: 'Месяц окончания*',
     rules: [v => !!v || 'Месяц окончания обязателен к заполнению'],
     component: VSelect,
@@ -76,8 +70,8 @@ export default {
       'Декабрь',
     ],
   }),
-  yearOfEndingWork0: Object.assign({}, Field, {
-    name: 'yearOfEndingWork0',
+  yearOfEndingWork: Object.assign({}, Field, {
+    name: 'yearOfEndingWork',
     label: 'Год окончания*',
     component: VTextField,
     type: 'number',

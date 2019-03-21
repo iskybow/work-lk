@@ -1,36 +1,44 @@
 <template>
   <div class="work-experience">
-    <div class="work-block" v-for="(item, index) in works" :key="index">
+    <v-subheader class="input-head" v-on:click="show = !show">Опыт работы</v-subheader>
+    <transition name="fade">
+      <div v-if="!show">
+        <div class="work-block" v-for="(item, index) in works" :key="index">
 
-      <v-btn class="remove-block" :id="'removeBlock'+index" @click="removeBlock(index)">
-        Удалить
-      </v-btn>
+          <v-btn class="remove-work" :id="'removeWork'+index" @click="removeWork(index)" v-if="works.length > 1">
+            Удалить
+          </v-btn>
 
-      <component v-for="(input, index) in item"
-                 :is="input.component"
-                 :key="index"
-                 :name="input.name"
-                 :label="input.label"
-                 :rules="input.rules"
-                 :items="input.items"
-                 :class="input.class"
-                 :type="input.type"
-                 v-model="value[input.name]"
-      >
-        {{ input.text }}
-      </component>
-    </div>
-    <v-btn type="button" class="btnWork"
-           @click="addNewWork()"
-    >
-      Добавить опыт работы
-    </v-btn>
+          <component v-for="(input, indexInput) in item"
+                     :is="input.component"
+                     :key="indexInput"
+                     :name="indexInput"
+                     :label="input.label"
+                     :rules="input.rules"
+                     :items="input.items"
+                     :class="input.class"
+                     :type="input.type"
+                     v-model="value[index][input.name]"
+          >
+            {{ input.text }}
+          </component>
+        </div>
+        <v-btn type="button" class="btnWork"
+               @click="addNewWork()"
+               v-if="works.length < 5"
+        >
+          Добавить опыт работы
+        </v-btn>
+      </div>
+    </transition>
 
   </div>
 </template>
 
 <script>
   import FormExperience from '../lk-form/experience';
+  import Field from '../models/Field';
+  import {VTextField, VSelect} from 'vuetify/lib'
 
   export default {
     name: "AddWork",
@@ -41,43 +49,107 @@
     },
     data() {
       return {
-        counterDopWork: 1,
-        works: [FormExperience]
+        works: [FormExperience],
+        show: false
       };
     },
     methods: {
-      removeBlock(index) {
-        delete this.works[index];
+      removeWork(index) {
+        this.works.splice(index, 1);
+        this.value.splice(index, 1);
         this.$forceUpdate();
-        document.getElementById('removeBlock'+index).remove();
       },
       addNewWork() {
-        let arrNames = {
-          'headWork': 'headWork' + this.counterDopWork,
-          'companyName': 'companyName' + this.counterDopWork,
-          'positionWork': 'positionWork' + this.counterDopWork,
-          'departmentWork': 'departmentWork' + this.counterDopWork,
-          'monthBeganWork': 'monthBeganWork' + this.counterDopWork,
-          'startYearWork': 'startYearWork' + this.counterDopWork,
-          'endMonthWork': 'endMonthWork' + this.counterDopWork,
-          'yearOfEndingWork': 'yearOfEndingWork' + this.counterDopWork
+        const template = {
+          companyName: Object.assign({}, Field, {
+            name: `companyName${this.works.length}`,
+            label: 'Название компании*',
+            component: VTextField,
+            rules: [v => !!v || 'Название компании обязателено к заполнению'],
+          }),
+          positionWork: Object.assign({}, Field, {
+            name: `positionWork${this.works.length}`,
+            label: 'Должность*',
+            component: VTextField,
+            rules: [v => !!v || 'Должность обязателена к заполнению'],
+          }),
+          departmentWork: Object.assign({}, Field, {
+            name: `departmentWork${this.works.length}`,
+            label: 'Отдел',
+            component: VTextField,
+            rules: [],
+          }),
+          monthBeganWork: Object.assign({}, Field, {
+            name: `monthBeganWork${this.works.length}`,
+            label: 'Месяц начала*',
+            rules: [v => !!v || 'Месяц начала обязателен к заполнению'],
+            component: VSelect,
+            items: [
+              'Январь',
+              'Февраль',
+              'Март',
+              'Апрель',
+              'Май',
+              'Июнь',
+              'Июль',
+              'Август',
+              'Сентябрь',
+              'Октябрь',
+              'Ноябрь',
+              'Декабрь',
+            ],
+          }),
+          startYearWork: Object.assign({}, Field, {
+            name: `startYearWork${this.works.length}`,
+            label: 'Год начала*',
+            component: VTextField,
+            type: 'number',
+            rules: [
+              v => !!v || 'Год начала обязателен к заполнению',
+              v => /^\d+$/.test(v) || 'Только цыфры'
+            ],
+          }),
+          endMonthWork: Object.assign({}, Field, {
+            name: `endMonthWork${this.works.length}`,
+            label: 'Месяц окончания*',
+            rules: [v => !!v || 'Месяц окончания обязателен к заполнению'],
+            component: VSelect,
+            items: [
+              'Январь',
+              'Февраль',
+              'Март',
+              'Апрель',
+              'Май',
+              'Июнь',
+              'Июль',
+              'Август',
+              'Сентябрь',
+              'Октябрь',
+              'Ноябрь',
+              'Декабрь',
+            ],
+          }),
+          yearOfEndingWork: Object.assign({}, Field, {
+            name: `yearOfEndingWork${this.works.length}`,
+            label: 'Год окончания*',
+            component: VTextField,
+            type: 'number',
+            rules: [
+              v => !!v || 'Год окончания обязателен к заполнению',
+              v => /^\d+$/.test(v) || 'Только цыфры'
+            ],
+          }),
         };
-        let data = {};
-        data[arrNames.headWork] = FormExperience.headWork0;
-        data[arrNames.companyName] = Object.assign(FormExperience.companyName0, {name: (FormExperience.companyName0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.positionWork] = Object.assign(FormExperience.positionWork0, {name: (FormExperience.positionWork0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.departmentWork] = Object.assign(FormExperience.departmentWork0, {name: (FormExperience.departmentWork0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.monthBeganWork] = Object.assign(FormExperience.monthBeganWork0, {name: (FormExperience.monthBeganWork0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.startYearWork] = Object.assign(FormExperience.startYearWork0, {name: (FormExperience.startYearWork0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.endMonthWork] = Object.assign(FormExperience.endMonthWork0, {name: (FormExperience.endMonthWork0.name).slice(0, -1) + this.counterDopWork});
-        data[arrNames.yearOfEndingWork] = Object.assign(FormExperience.yearOfEndingWork0, {name: (FormExperience.yearOfEndingWork0.name).slice(0, -1) + this.counterDopWork});
-
-        this.works.push(data);
-        this.counterDopWork++;
-        let btn = document.querySelectorAll('.work-block');
-        if (btn.length === 4) {
-          document.querySelector('.btnWork').classList.add('hide-btn');
-        }
+        this.works.push(template);
+        this.value.push({
+          companyName: '',
+          positionWork: '',
+          departmentWork: '',
+          monthBeganWork: '',
+          startYearWork: '',
+          endMonthWork: '',
+          yearOfEndingWork: '',
+        });
       },
     },
   }
@@ -86,8 +158,5 @@
 <style>
   .work-experience {
     margin-bottom: 20px;
-  }
-  .work-experience .work-block:first-child .remove-block {
-    display: none;
   }
 </style>

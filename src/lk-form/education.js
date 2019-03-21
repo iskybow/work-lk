@@ -1,21 +1,14 @@
 import Field from '../models/Field';
-import {VTextField, VSelect, VSubheader,} from 'vuetify/lib'
+import {VTextField, VSelect} from 'vuetify/lib'
 
 export default {
-  headUniversity0: Object.assign({}, Field, {
-    id: 'headUniversity',
-    text: 'Образование',
-    rules: [],
-    class: 'input-head',
-    component: VSubheader,
-  }),
-  universityName0: Object.assign({}, Field, {
+  universityName: Object.assign({}, Field, {
     name: 'universityName',
     label: 'Название университета*',
     component: VTextField,
     rules: [v => !!v  || 'Название университета обязателено к заполнению'],
   }),
-  admissionYear0: Object.assign({}, Field, {
+  admissionYear: Object.assign({}, Field, {
     name: 'admissionYear',
     label: 'Год поступления*',
     component: VTextField,
@@ -25,7 +18,7 @@ export default {
       v => /^\d+$/.test(v) || 'Только цыфры'
     ],
   }),
-  yearOfEnding0: Object.assign({}, Field, {
+  yearOfEnding: Object.assign({}, Field, {
     name: 'yearOfEnding',
     label: 'Год окончания*',
     component: VTextField,
@@ -35,7 +28,7 @@ export default {
       v => /^\d+$/.test(v) || 'Только цыфры'
     ],
   }),
-  academicDegree0: Object.assign({}, Field, {
+  academicDegree: Object.assign({}, Field, {
     name: 'academicDegree',
     label: 'Академ степень',
     rules: [],
@@ -45,13 +38,13 @@ export default {
       'Магистр',
     ],
   }),
-  faculty0: Object.assign({}, Field, {
+  faculty: Object.assign({}, Field, {
     name: 'faculty',
     label: 'Факультет*',
     rules: [v => !!v  || 'Факультет обязателен к заполнению'],
     component: VTextField,
   }),
-  specialization0: Object.assign({}, Field, {
+  specialization: Object.assign({}, Field, {
     name: 'specialization',
     label: 'Специализация',
     rules: [],

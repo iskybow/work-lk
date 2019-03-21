@@ -10,7 +10,7 @@ export default {
     label: 'Имя*',
     rules: [
       v => !!v || 'Имя обязательно к заполнению',
-      v => (v && v.length >= 5) || 'Больше 3 символов'
+      v => (v && v.length >= 3) || 'Больше 3 символов'
     ],
     counter: 15,
     component: VTextField,

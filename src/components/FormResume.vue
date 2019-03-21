@@ -13,7 +13,7 @@
       @input="setImage"
     >
       <label for="fileInput" slot="upload-label">
-        <span class="upload-caption">Выбрать фото</span>
+        <span class="upload-caption">Выбрать фото <img src="../assets/login.png"></span>
       </label>
     </image-uploader>
 
@@ -29,22 +29,32 @@
         hasImage: false,
         image: null,
         formData: {
-          workBlock: {
-            companyName0: '',
-            positionWork0: '',
-            departmentWork0: '',
-            monthBeganWork0: '',
-            startYearWork0: '',
-            endMonthWork0: '',
-            yearOfEndingWork0: '',
-          },
-          educationBlock: {
-            universityName: '',
-            admissionYear: '',
-            yearOfEnding: '',
-            academicDegree: '',
-            faculty: '',
-            specialization: ''
+          workBlock: [
+            {
+              companyName: '',
+              positionWork: '',
+              departmentWork: '',
+              monthBeganWork: '',
+              startYearWork: '',
+              endMonthWork: '',
+              yearOfEndingWork: '',
+            }
+          ],
+          educationBlock: [
+            {
+              universityName: '',
+              admissionYear: '',
+              yearOfEnding: '',
+              academicDegree: '',
+              faculty: '',
+              specialization: '',
+            }
+          ],
+          addSocial: {
+            vkontakte: '',
+            facebook: '',
+            instagram: '',
+            skype: '',
           }
         }
       };
@@ -81,5 +91,17 @@
   }
   .input-file img {
     width: 200px;
+  }
+  .showRemoveBtn {
+    display: inline-flex !important;
+  }
+  .upload-caption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .upload-caption img {
+    width: 20px;
+    margin-left: 10px;
   }
 </style>
