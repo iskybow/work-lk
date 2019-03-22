@@ -44,7 +44,7 @@
     name: "AddWork",
     props: {
       value: {
-        type: [String,Number,Boolean,Array,Object],
+        type: [Array],
       }
     },
     data() {
@@ -57,7 +57,6 @@
       removeWork(index) {
         this.works.splice(index, 1);
         this.value.splice(index, 1);
-        this.$forceUpdate();
       },
       addNewWork() {
         const template = {
@@ -141,21 +140,13 @@
           }),
         };
         this.works.push(template);
-        this.value.push({
-          companyName: '',
-          positionWork: '',
-          departmentWork: '',
-          monthBeganWork: '',
-          startYearWork: '',
-          endMonthWork: '',
-          yearOfEndingWork: '',
-        });
+        this.value.push({});
       },
     },
   }
 </script>
 
-<style>
+<style scoped>
   .work-experience {
     margin-bottom: 20px;
   }

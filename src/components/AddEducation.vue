@@ -5,7 +5,10 @@
       <div v-if="!show">
         <div class="education-block" v-for="(item, index) in education" :key="index">
 
-          <v-btn class="remove-education" :id="'removeEducation'+index" @click="removeEducation(index)" v-if="education.length > 1">
+          <v-btn class="remove-education"
+                 :id="'removeEducation'+index"
+                 @click="removeEducation(index)"
+                 v-if="education.length > 1">
             Удалить
           </v-btn>
 
@@ -23,7 +26,8 @@
             {{ input.text }}
           </component>
         </div>
-        <v-btn type="button" class="btnEducation"
+        <v-btn type="button"
+               class="btnEducation"
                @click="addNewEducation()"
                v-if="education.length < 5"
         >
@@ -49,14 +53,13 @@
     },
     props: {
       value: {
-        type: [String,Number,Boolean,Array,Object],
+        type: [Array],
       }
     },
     methods: {
       removeEducation(index) {
         this.education.splice(index, 1);
         this.value.splice(index, 1);
-        this.$forceUpdate();
       },
       addNewEducation() {
         const template = {
@@ -110,20 +113,13 @@
           }),
         };
         this.education.push(template);
-        this.value.push({
-          universityName: '',
-          admissionYear: '',
-          yearOfEnding: '',
-          academicDegree: '',
-          faculty: '',
-          specialization: '',
-        });
+        this.value.push({});
       },
     },
   }
 </script>
 
-<style>
+<style scoped>
   .education {
     margin-bottom: 20px;
   }
