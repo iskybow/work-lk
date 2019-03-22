@@ -69,11 +69,4 @@
     font-size: 22px;
     border-bottom: 1px solid rgba(0,0,0,0.54);
   }
-  .hide-btn {
-    display: none;
-  }
-  .remove-block {
-    margin-top: 30px;
-    margin-bottom: -10px;
-  }
 </style>

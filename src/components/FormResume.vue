@@ -104,4 +104,13 @@
     width: 20px;
     margin-left: 10px;
   }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
+  }
+  .remove-work, .remove-education {
+    margin-top: 30px;
+  }
 </style>
