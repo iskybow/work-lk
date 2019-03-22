@@ -1,5 +1,5 @@
 <template>
-  <div class="work-experience">
+  <div class="item-block">
     <v-subheader class="input-head" v-on:click="show = !show">Опыт работы</v-subheader>
     <transition name="fade">
       <div v-if="!show">
@@ -147,7 +147,5 @@
 </script>
 
 <style scoped>
-  .work-experience {
-    margin-bottom: 20px;
-  }
+
 </style>

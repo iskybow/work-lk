@@ -42,6 +42,7 @@
       valid: true,
     }),
     props: {
+      sendForm: Function,
       paramsFile: Object,
       value: {
         type: Object,
@@ -55,6 +56,7 @@
       validate () {
         if (this.$refs.form.validate()) {
           this.snackbar = true;
+          this.sendForm;
         }
       },
     },

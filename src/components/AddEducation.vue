@@ -1,5 +1,5 @@
 <template>
-  <div class="education">
+  <div class="item-block">
     <v-subheader class="input-head" v-on:click="show = !show">Образование</v-subheader>
     <transition name="fade">
       <div v-if="!show">
@@ -120,7 +120,4 @@
 </script>
 
 <style scoped>
-  .education {
-    margin-bottom: 20px;
-  }
 </style>

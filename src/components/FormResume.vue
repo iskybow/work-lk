@@ -1,5 +1,5 @@
 <template>
-  <FormTemplate :paramsFile="getFormData()" v-model="formData">
+  <FormTemplate :paramsFile="getFormData()" v-model="formData" :sendForm="saveData">
 
     <image-uploader
       class="input-file"
@@ -62,6 +62,16 @@
     name: "FormVacancy",
     components: {FormTemplate},
     methods: {
+      saveData() {
+        this.$http.get('http://site/reqest/resume',{formData: this.formData}).then(response => {
+          console.log(response);
+          console.log('Форма успешно отправлена');
+        }, response => {
+            console.log(response);
+            console.log('Форма не отправлена');
+          }
+        )
+      },
       getFormData() {
         return FormResume;
       },
@@ -111,5 +121,8 @@
   }
   .remove-work, .remove-education {
     margin-top: 30px;
+  }
+  .item-block {
+    margin-bottom: 20px;
   }
 </style>
