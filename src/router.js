@@ -9,13 +9,13 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/FormVacancy',
-      name: 'FormVacancy',
+      path: '/vacancy',
+      name: 'vacancy',
       component: FormVacancy
     },
     {
-      path: '/FormResume',
-      name: 'FormResume',
+      path: '/resume',
+      name: 'resume',
       component: FormResume
     }
   ]

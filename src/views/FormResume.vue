@@ -4,71 +4,67 @@
     v-model="valid"
     lazy-validation
   >
-    <slot />
-    <component v-for="(input, index) in formTemplate()"
+    <component v-for="(input, index) in form()"
                :is="input.component"
                :key="index"
                :name="input.name"
                :label="input.label"
-               :id="input.id"
                :rules="input.rules"
                :counter="input.counter"
                :items="input.items"
                :prefix="input.prefix"
-               :mask="input.maskPhone"
-               :class="input.class"
-               :type="input.type"
-               v-model="value[index]"
-    >
-      {{ input.text }}
-    </component>
+               v-model="formData[index]"
+    ></component>
 
     <v-btn
       :disabled="!valid"
       color="success"
       @click="validate"
-      type="button"
     >
       Сохранить
     </v-btn>
-
   </v-form>
 </template>
 
 <script>
+  import Advert from '../models/Advert';
+  import Form from '../lk-form/lk-form';
+
   export default {
-    name: "FormTemplate",
+    name: "FormResume",
     data: () => ({
       valid: true,
+      formData: {
+        duties: ''
+      }
     }),
     props: {
-      sendForm: Function,
-      paramsFile: Object,
       value: {
         type: Object,
-      },
-
+        default: () => {
+          return Object.assign(Advert, {})
+        }
+      }
+    },computed: {
+      username () {
+        // Мы скоро разберём что такое `params`
+        return this.$route.params.username
+      }
     },
     methods: {
-      formTemplate() {
-        return this.paramsFile;
+      form() {
+        return Form;
       },
       validate () {
         if (this.$refs.form.validate()) {
-          this.snackbar = true;
-          this.sendForm();
+          this.snackbar = true
         }
       },
+      goBack () {
+        window.history.length > 1
+          ? this.$router.go(-1)
+          : this.$router.push('/')
+      }
     },
   }
 </script>
-
-<style>
-  .input-head {
-    margin-top: 10px;
-    margin-bottom: 15px;
-    padding: 0;
-    font-size: 22px;
-    border-bottom: 1px solid rgba(0,0,0,0.54);
-  }
-</style>
