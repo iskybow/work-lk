@@ -31,23 +31,23 @@
         formData: {
           workBlock: [
             {
-              companyName: '',
-              positionWork: '',
-              departmentWork: '',
-              monthBeganWork: '',
-              startYearWork: '',
-              endMonthWork: '',
-              yearOfEndingWork: '',
+              name: '',
+              post: '',
+              department: '',
+              month_from: '',
+              year_from: '',
+              month_to: '',
+              year_to: '',
             }
           ],
           educationBlock: [
             {
-              universityName: '',
-              admissionYear: '',
-              yearOfEnding: '',
-              academicDegree: '',
+              name: '',
+              year_from: '',
+              year_to: '',
+              academic_degree: '',
               faculty: '',
-              specialization: '',
+              specialisation: '',
             }
           ],
           addSocial: {
@@ -55,22 +55,48 @@
             facebook: '',
             instagram: '',
             skype: '',
-          }
-        }
+          },
+        },
       };
     },
     name: "FormVacancy",
     components: {FormTemplate},
     methods: {
       saveData() {
-        this.$http.get('http://site/reqest/resume',{formData: this.formData}).then(response => {
-          console.log(response);
-          console.log('Форма успешно отправлена');
-        }, response => {
-            console.log(response);
-            console.log('Форма не отправлена');
+        let data = {
+          image_url: '',
+          title: this.formData.careerObjective,
+          min_salary: this.formData.salaryFrom,
+          max_salary: this.formData.salaryBefore,
+          description: this.formData.aboutMe,
+          vk: this.formData.addSocial.vkontakte,
+          facebook: this.formData.addSocial.facebook,
+          instagram: this.formData.addSocial.instagram,
+          skype: this.formData.addSocial.skype,
+          education: this.formData.educationBlock,
+          work: this.formData.workBlock,
+          skills: [],
+        };
+        let image = document.querySelector('.fileinput');
+        if(image.classList.contains('fileinput--loaded')) {
+          data.image_url = this.image.name;
+        }
+
+        let dutiesVal = document.querySelectorAll('.duties input');
+        for (let i = 0; i < dutiesVal.length; i++) {
+          if (dutiesVal[i].value !== '') {
+            data.skills.push({name: dutiesVal[i].value})
           }
-        )
+        }
+        this.$http.post(`${process.env.VUE_APP_API_URL}/request/resume`, data)
+          .then(response => {
+              console.log(response);
+              console.log('Форма успешно отправлена');
+            }, response => {
+              console.log(response);
+              console.log('Форма не отправлена');
+            }
+          )
       },
       getFormData() {
         return FormResume;
@@ -97,9 +123,6 @@
     margin-top: 20px;
     color: rgba(0,0,0,0.54);
     cursor: pointer;
-  }
-  .input-file img {
-    width: 200px;
   }
   .showRemoveBtn {
     display: inline-flex !important;
