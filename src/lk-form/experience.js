@@ -2,46 +2,82 @@ import Field from '../models/Field';
 import {VTextField, VSelect} from 'vuetify/lib'
 
 export default {
-  companyName: Object.assign({}, Field, {
-    name: 'companyName',
+  name: Object.assign({}, Field, {
+    name: 'name',
     label: 'Название компании*',
     component: VTextField,
     rules: [v => !!v || 'Название компании обязателено к заполнению'],
   }),
-  positionWork: Object.assign({}, Field, {
-    name: 'positionWork',
+  post: Object.assign({}, Field, {
+    name: 'post',
     label: 'Должность*',
     component: VTextField,
     rules: [v => !!v || 'Должность обязателена к заполнению'],
   }),
-  departmentWork: Object.assign({}, Field, {
-    name: 'departmentWork',
+  department: Object.assign({}, Field, {
+    name: 'department',
     label: 'Отдел',
     component: VTextField,
     rules: [],
   }),
-  monthBeganWork: Object.assign({}, Field, {
-    name: 'monthBeganWork',
+  month_from: Object.assign({}, Field, {
+    name: 'month_from',
     label: 'Месяц начала*',
     rules: [v => !!v || 'Месяц начала обязателен к заполнению'],
     component: VSelect,
     items: [
-      'Январь',
-      'Февраль',
-      'Март',
-      'Апрель',
-      'Май',
-      'Июнь',
-      'Июль',
-      'Август',
-      'Сентябрь',
-      'Октябрь',
-      'Ноябрь',
-      'Декабрь',
+      {
+        name: 'Январь',
+        id: '1'
+      },
+      {
+        name: 'Февраль',
+        id: '2'
+      },
+      {
+        name: 'Март',
+        id: '3'
+      },
+      {
+        name: 'Апрель',
+        id: '4'
+      },
+      {
+        name: 'Май',
+        id: '5'
+      },
+      {
+        name: 'Июнь',
+        id: '6'
+      },
+      {
+        name: 'Июль',
+        id: '7'
+      },
+      {
+        name: 'Август',
+        id: '8'
+      },
+      {
+        name: 'Сентябрь',
+        id: '9'
+      },
+      {
+        name: 'Октябрь',
+        id: '10'
+      },
+      {
+        name: 'Ноябрь',
+        id: '11'
+      },
+      {
+        name: 'Декабрь',
+        id: '12'
+      },
     ],
   }),
-  startYearWork: Object.assign({}, Field, {
-    name: 'startYearWork',
+  year_from: Object.assign({}, Field, {
+    name: 'year_from',
     label: 'Год начала*',
     component: VTextField,
     type: 'number',
@@ -50,28 +86,64 @@ export default {
       v => /^\d+$/.test(v) || 'Только цыфры'
     ],
   }),
-  endMonthWork: Object.assign({}, Field, {
-    name: 'endMonthWork',
+  month_to: Object.assign({}, Field, {
+    name: 'month_to',
     label: 'Месяц окончания*',
     rules: [v => !!v || 'Месяц окончания обязателен к заполнению'],
     component: VSelect,
     items: [
-      'Январь',
-      'Февраль',
-      'Март',
-      'Апрель',
-      'Май',
-      'Июнь',
-      'Июль',
-      'Август',
-      'Сентябрь',
-      'Октябрь',
-      'Ноябрь',
-      'Декабрь',
+      {
+        name: 'Январь',
+        id: '1'
+      },
+      {
+        name: 'Февраль',
+        id: '2'
+      },
+      {
+        name: 'Март',
+        id: '3'
+      },
+      {
+        name: 'Апрель',
+        id: '4'
+      },
+      {
+        name: 'Май',
+        id: '5'
+      },
+      {
+        name: 'Июнь',
+        id: '6'
+      },
+      {
+        name: 'Июль',
+        id: '7'
+      },
+      {
+        name: 'Август',
+        id: '8'
+      },
+      {
+        name: 'Сентябрь',
+        id: '9'
+      },
+      {
+        name: 'Октябрь',
+        id: '10'
+      },
+      {
+        name: 'Ноябрь',
+        id: '11'
+      },
+      {
+        name: 'Декабрь',
+        id: '12'
+      },
     ],
   }),
-  yearOfEndingWork: Object.assign({}, Field, {
-    name: 'yearOfEndingWork',
+  year_to: Object.assign({}, Field, {
+    name: 'year_to',
     label: 'Год окончания*',
     component: VTextField,
     type: 'number',
