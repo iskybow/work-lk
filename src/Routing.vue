@@ -27,6 +27,10 @@
             title: 'Резюме',
             url: '/resume'
           },
+          {
+            title: 'Компания',
+            url: '/company'
+          },
         ],
       }
     },
