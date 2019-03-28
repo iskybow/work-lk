@@ -14,6 +14,8 @@
                :rules="input.rules"
                :counter="input.counter"
                :items="input.items"
+               item-text="name"
+               item-value="id"
                :prefix="input.prefix"
                :mask="input.maskPhone"
                :class="input.class"
@@ -70,5 +72,9 @@
     padding: 0;
     font-size: 22px;
     border-bottom: 1px solid rgba(0,0,0,0.54);
+  }
+  .input-file img {
+    width: auto;
+    max-width: 200px;
   }
 </style>

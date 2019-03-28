@@ -13,24 +13,24 @@
 
 <script>
 
-export default {
-  name: 'App',
-  components: {},
-  data () {
-    return {
-      linkMenu: [
-        {
-          title: 'Вакансия',
-          url: '/vacancy'
-        },
-        {
-          title: 'Резюме',
-          url: '/resume'
-        },
-      ],
-    }
-  },
-}
+  export default {
+    name: 'App',
+    components: {},
+    data () {
+      return {
+        linkMenu: [
+          {
+            title: 'Вакансия',
+            url: '/vacancy'
+          },
+          {
+            title: 'Резюме',
+            url: '/resume'
+          },
+        ],
+      }
+    },
+  }
 </script>
 <style scoped>
   .nav-menu {

@@ -17,6 +17,6 @@ export default new Router({
       path: '/resume',
       name: 'resume',
       component: FormResume
-    }
+    },
   ]
 })
